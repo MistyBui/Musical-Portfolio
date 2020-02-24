@@ -1,13 +1,16 @@
-/* eslint-disable linebreak-style */
 import React from 'react';
-import Text, {View} from 'native-base';
+import List from '../components/List';
+import {View} from 'react-native';
 
-const Home = () => {
+const Home = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const {navigation} = props;
   return (
     <View>
-      <Text>this is home pgae</Text>
+      <List navigation ={navigation} mode={'all'}></List>
     </View>
   );
 };
+
 
 export default Home;
