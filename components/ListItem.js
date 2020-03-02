@@ -10,7 +10,7 @@ import {
   Button,
   Text,
   Thumbnail,
-  H3,
+  H3, Icon,
 } from 'native-base';
 import PropTypes from 'prop-types';
 import {mediaURL} from '../constants/urlConst';
@@ -19,8 +19,8 @@ import {getUser} from '../hooks/APIHook';
 const ListItem = (props) => {
   const [owner, setOwner] = useState({});
   const getOwner = async () => {
-    const owner = await getUser(props.singleMedia.user_id);
-    setOwner(owner);
+    const ownerName = await getUser(props.singleMedia.user_id);
+    setOwner(ownerName);
   };
 
   useEffect(() => {
@@ -29,11 +29,12 @@ const ListItem = (props) => {
 
   return (
     <BaseListItem
-      avatar>
+      thumbnail
+    >
       <Left>
         <Thumbnail
           square
-          source={{uri: mediaURL + props.singleMedia.thumbnails.w160}}
+          source={{uri: mediaURL + props.singleMedia.filename}}
         />
       </Left>
       <Body>
@@ -44,12 +45,14 @@ const ListItem = (props) => {
         </Text>
       </Body>
       <Right>
-        <Button onPress={
-          () => {
-            props.navigation.push('Single', {file: props.singleMedia});
-          }
-        }>
-          <Text>View</Text>
+        <Button
+          transparent
+          onPress={
+            () => {
+              props.navigation.push('Single', {file: props.singleMedia});
+            }
+          }>
+          <Icon name='eye'></Icon>
         </Button>
       </Right>
     </BaseListItem>

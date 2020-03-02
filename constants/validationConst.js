@@ -56,4 +56,25 @@ const uploadConstraints = {
   },
 };
 
-export {registerConstraints, uploadConstraints};
+const modifyConstraints = {
+  email: {
+    email: {
+      message: 'not valid.',
+    },
+  },
+  password: {
+    length: {
+      minimum: 5,
+      message: 'must be at least 5 characters',
+    },
+  },
+  confirmPassword: {
+    equality: {
+      attribute: 'password',
+    },
+  },
+};
+
+export {registerConstraints,
+  uploadConstraints,
+  modifyConstraints};

@@ -2,7 +2,8 @@
 import {useState} from 'react';
 import validate from 'validate.js';
 import {fetchGET} from './APIHook';
-import {registerConstraints} from '../constants/validationConst';
+import {registerConstraints}
+  from '../constants/validationConst';
 
 const useSignUpForm = () => {
   const [inputs, setInputs] = useState({});
@@ -63,7 +64,6 @@ const useSignUpForm = () => {
         fetch: undefined,
       }));
   };
-
   const checkAvail = async () => {
     const text = inputs.username;
     try {
@@ -108,7 +108,9 @@ const useSignUpForm = () => {
     handleFullnameChange,
     checkAvail,
     validateOnSend,
+    validateField,
     inputs,
+    setInputs,
     errors,
     setErrors,
   };

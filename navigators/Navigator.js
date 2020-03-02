@@ -13,6 +13,8 @@ import Upload from '../views/Upload';
 // import Modify from '../views/Modify';
 import AuthLoading from '../views/AuthLoading';
 import Login from '../views/Login';
+import Search from '../views/Search';
+import ModifyUser from '../views/ModifyUser';
 import {Icon} from 'native-base';
 
 
@@ -56,7 +58,7 @@ const StackNavigator = createStackNavigator(
         headerMode: 'none', // this will hide the header
       },
     },
-   Single: {
+    Single: {
       screen: Single,
     },
     /* MyFiles: {
@@ -65,10 +67,15 @@ const StackNavigator = createStackNavigator(
     Modify: {
       screen: Modify,
     },*/
+    Search: {
+      screen: Search,
+    },
     Logout: {
       screen: Login,
     },
-
+    ModifyUser: {
+      screen: ModifyUser,
+    },
   },
 );
 

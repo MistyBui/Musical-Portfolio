@@ -39,16 +39,16 @@ const List = (props) => {
       {loading ? (
         <Spinner/>
       ) : (
-        <BaseList
-          dataArray={media}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}) => <ListItem
-            navigation={props.navigation}
-            singleMedia={item}
-            mode={props.mode}
-            getMedia={getMedia}
-          />}
-        />
+          <BaseList
+            dataArray={media}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => <ListItem
+              navigation={props.navigation}
+              singleMedia={item}
+              mode={props.mode}
+              getMedia={getMedia}
+            />}
+          />
       )}
       <NavigationEvents
         onDidBlur={ () => {

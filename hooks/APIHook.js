@@ -38,7 +38,7 @@ const fetchPOST = async (endpoint = '', data = {}, token = '') => {
   return json;
 };
 
-const fetchPUT = async (endpoint = '', params= {}, data = {}, token = '') => {
+const fetchPUT = async (endpoint = '', data = {}, token = '') => {
   const fetchOptions = {
     method: 'PUT',
     headers: {
@@ -47,10 +47,11 @@ const fetchPUT = async (endpoint = '', params= {}, data = {}, token = '') => {
     },
     body: JSON.stringify(data),
   };
-  const response = await fetch(apiUrl + endpoint + params, fetchOptions);
+  const response = await fetch(apiUrl + endpoint, fetchOptions);
   const json = await response.json();
-  console.log(json);
+  console.log('apihook', json);
   if (response.status === 400 || response.status === 401) {
+    alert('Failed. Contact admin');
     const message = Object.values(json).join();
     throw new Error(message);
   } else if (response.status > 299) {
@@ -73,6 +74,19 @@ const getUserMedia = async (token) => {
     return await fetchGET('media', item.file_id);
   }));
   return result;
+};
+
+const getSearchedMedia = async (id) =>{
+  const json = await fetchGET('media/user/' + id);
+  const result = await Promise.all(json.map(async (item) => {
+    return await fetchGET('media', item.file_id);
+  }));
+  return result;
+};
+
+const getFileComment = async (id) => {
+  const list = await fetchGET('comments/file/' + id);
+  return list;
 };
 
 const fetchFormData = async (
@@ -105,6 +119,12 @@ const getUser = async (id) =>{
   }
 };
 
+const getCurrentUser = async () => {
+  const userFromStorage = await AsyncStorage.getItem('user');
+  const uData = JSON.parse(userFromStorage);
+  return uData;
+};
+
 const fetchDELETE = async (endpoint = '', params = '', token = '') => {
   const fetchOptions = {
     method: 'DELETE',
@@ -120,6 +140,22 @@ const fetchDELETE = async (endpoint = '', params = '', token = '') => {
   return await response.json();
 };
 
+const getUserList = async () => {
+  try {
+    // console.log('api');
+    const token = await AsyncStorage.getItem('userToken');
+    const json = await fetchGET('users', '', token);
+    // console.log('apihook', json);
+    return json;
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+
 export {getAllMedia,
   getUser, fetchGET, fetchPOST, fetchFormData,
-  getUserMedia, fetchDELETE};
+  getUserMedia, fetchDELETE, fetchPUT,
+  getSearchedMedia, getUserList,
+  getFileComment, getCurrentUser,
+};
