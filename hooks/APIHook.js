@@ -60,6 +60,7 @@ const fetchPUT = async (endpoint = '', data = {}, token = '') => {
   return json;
 };
 
+// get all media
 const getAllMedia = async () => {
   const json = await fetchGET('media/all');
   const result = await Promise.all(json.files.map(async (item) => {
@@ -68,6 +69,7 @@ const getAllMedia = async () => {
   return result;
 };
 
+// get media of each user
 const getUserMedia = async (token) => {
   const json = await fetchGET('media/user', '', token);
   const result = await Promise.all(json.map(async (item) => {
@@ -76,6 +78,7 @@ const getUserMedia = async (token) => {
   return result;
 };
 
+// get media searched from searchbar
 const getSearchedMedia = async (id) =>{
   const json = await fetchGET('media/user/' + id);
   const result = await Promise.all(json.map(async (item) => {
@@ -84,6 +87,7 @@ const getSearchedMedia = async (id) =>{
   return result;
 };
 
+// get all comments of a file
 const getFileComment = async (id) => {
   const list = await fetchGET('comments/file/' + id);
   return list;
@@ -135,27 +139,49 @@ const fetchDELETE = async (endpoint = '', params = '', token = '') => {
   const response = await fetch(apiUrl + endpoint + '/' + params,
       fetchOptions);
   if (!response.ok) {
+    alert('You are not allowed to delete!!!');
     throw new Error('fetchDELETE error: ' + response.status);
   }
   return await response.json();
 };
 
+// get all users
 const getUserList = async () => {
   try {
-    // console.log('api');
     const token = await AsyncStorage.getItem('userToken');
     const json = await fetchGET('users', '', token);
-    // console.log('apihook', json);
     return json;
   } catch (e) {
     console.log(e.message);
   }
 };
 
+// get like of a file
+const getFileLike = async (id) => {
+  const list = await fetchGET('favourites/file', id, '');
+  return list;
+};
+
+// get list of favourites which users made
+const getFavourites = async () => {
+  const token = await AsyncStorage.getItem('userToken');
+  const list = await fetchGET('favourites', '', token);
+  return list;
+};
+
+// get media which users liked
+const getAllFav = async () => {
+  const list = await getFavourites();
+  const result = await Promise.all(list.map(async (item) => {
+    return await fetchGET('media', item.file_id);
+  }));
+  return result;
+};
 
 export {getAllMedia,
   getUser, fetchGET, fetchPOST, fetchFormData,
   getUserMedia, fetchDELETE, fetchPUT,
   getSearchedMedia, getUserList,
-  getFileComment, getCurrentUser,
+  getFileComment, getCurrentUser, getFileLike,
+  getFavourites, getAllFav,
 };

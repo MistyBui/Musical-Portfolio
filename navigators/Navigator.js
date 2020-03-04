@@ -15,6 +15,7 @@ import AuthLoading from '../views/AuthLoading';
 import Login from '../views/Login';
 import Search from '../views/Search';
 import ModifyUser from '../views/ModifyUser';
+import Favourites from '../views/Favourites';
 import {Icon} from 'native-base';
 
 
@@ -23,6 +24,7 @@ const TabNavigator = createBottomTabNavigator(
     Home,
     Profile,
     Upload,
+    Favourites,
   },
   {
     defaultNavigationOptions: ({navigation}) => ({
@@ -35,6 +37,8 @@ const TabNavigator = createBottomTabNavigator(
           iconName = 'person';
         } else if (routeName === 'Upload') {
           iconName = 'md-arrow-round-up';
+        } else if (routeName === 'Favourites') {
+          iconName = 'heart';
         }
         // You can return any component that you like here!
         return <Icon

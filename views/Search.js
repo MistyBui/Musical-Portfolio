@@ -4,7 +4,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import {
   Container,
   List as BaseList,
-  Text, H3,
+  H3,
   View,
   Spinner,
   Card,
@@ -17,27 +17,24 @@ import {MediaContext} from '../contexts/MediaContext';
 
 const Search = (props) => {
   const {navigation} = props;
+  // get seacrh word from home
   const searchKey = navigation.getParam('searchParam', 'no');
-  // console.log('search', searchKey);
-  // const [user, setUser] = useState({});
+
   const {searchMedia, setSearchMedia} = useContext(MediaContext);
   const [exist, setExist] = useState(true);
   const [loading, setLoading] = useState(true);
 
   const getList = async () =>{
     const nameList = await getUserList();
-    // console.log('search 21:', nameList);
-    // console.log('search22', searchKey);
+    // filter to return array of name from search bar
     const name = nameList.filter((item) => {
       return item.username.toLowerCase() == searchKey.toLowerCase();
     });
     console.log('search23', name);
 
+    // if found, get media with the first user id
     if (name.length) {
-      // setUser(name);
-      // console.log('search30', user);
       const data = await getSearchedMedia(name[0].user_id);
-      // console.log('search33:', data);
       setSearchMedia(data.reverse());
       setLoading(false);
     } else {

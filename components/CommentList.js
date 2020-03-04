@@ -6,8 +6,8 @@ import {MediaContext} from '../contexts/MediaContext';
 import {
   List as BaseList, Spinner, View,
 } from 'native-base';
-import {getFileComment} from '../hooks/APIHook';
-// import {AsyncStorage} from 'react-native';
+import {getFileComment, fetchGET} from '../hooks/APIHook';
+import {AsyncStorage} from 'react-native';
 
 const CommentList = (props) => {
   const {commentMedia, setCommentMedia} = useContext(MediaContext);
@@ -17,11 +17,29 @@ const CommentList = (props) => {
     try {
       const list = await getFileComment(props.file);
       console.log('commentlist', list);
-      setCommentMedia(list.reverse());
+      const token = await AsyncStorage.getItem('userToken');
+      // get users whose id appears in list
+      const userList = await Promise.all(list.map((item) => {
+        return fetchGET('users', item.user_id, token);
+      }));
+      console.log('cmtlist', userList);
+      // join 2 array to have list with user and file information
+      const newList = mergeArrayObjects(list, userList);
+      console.log('cmtList27', newList);
+      setCommentMedia(newList.reverse());
       setLoading(false);
     } catch (e) {
       console.log(e.message);
     }
+  };
+
+  // merging two objects
+  const mergeArrayObjects = (arr1, arr2) =>{
+    return arr1.map((item, i)=>{
+      if (item.user_id === arr2[i].user_id) {
+        return Object.assign({}, item, arr2[i]);
+      }
+    });
   };
 
   useEffect(() => {
@@ -40,7 +58,7 @@ const CommentList = (props) => {
           navigation={props.navigation}
           singleMedia={item}
           getMedia={getComments}
-          user = {props.user}
+          user = {props.owner}
         />}
       />
      )}

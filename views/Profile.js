@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   Container,
   Content,
@@ -15,13 +15,15 @@ import {fetchGET, getCurrentUser} from '../hooks/APIHook';
 import AsyncImage from '../components/AsyncImage';
 import {Dimensions} from 'react-native';
 import {mediaURL} from '../constants/urlConst';
-import {getUserMedia} from '../hooks/APIHook';
+import {getUserMedia, getFavourites} from '../hooks/APIHook';
 import {NavigationEvents} from 'react-navigation';
+import {MediaContext} from '../contexts/MediaContext';
 
 const deviceHeight = Dimensions.get('window').height;
 
 
 const Profile = (props) => {
+  const {favMedia, setFavMedia} = useContext(MediaContext);
   const [user, setUser] = useState({
     userdata: {},
     avatar: 'https://',
@@ -40,11 +42,14 @@ const Profile = (props) => {
       }
       const token = await AsyncStorage.getItem('userToken');
       const data= await getUserMedia(token);
+      const favList = await getFavourites();
+      setFavMedia(favList);
       setUser((user) => (
         {
           userdata: userData,
           avatar: avPic,
           count: data.length,
+          like: favMedia.length,
         }));
     } catch (e) {
       console.log('Profile error: ', e.message);
@@ -92,12 +97,12 @@ const Profile = (props) => {
               {user.count} posts
             </Text>
           </CardItem>
-          {/* <CardItem>
+          <CardItem>
             <Icon name='heart'/>
             <Text numberOfLines={1}>
-              {user.count} likes
+              {user.like} likes
             </Text>
-          </CardItem>*/}
+          </CardItem>
           <CardItem footer bordered>
             <Body style={{flexDirection: 'row',
               alignSelf: 'center', marginTop: 5}}>
