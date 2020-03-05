@@ -30,6 +30,8 @@ import {MediaContext} from '../contexts/MediaContext';
 const deviceHeight = Dimensions.get('window').height;
 
 const Single = (props) => {
+console.log(props);
+
   const {navigation} = props;
   const {commentMedia, setCommentMedia} = useContext(MediaContext);
   const [owner, setOwner] = useState({});
@@ -112,7 +114,7 @@ const Single = (props) => {
               volumn={1.0}
               isMuted={false}
               resizeMode='contain'
-              shouldPlay
+              //shouldPlay
               isLooping
               useNativeControls
               style={{width: '100%', height: deviceHeight/2}}
