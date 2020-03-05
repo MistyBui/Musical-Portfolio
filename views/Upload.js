@@ -54,7 +54,7 @@ const Upload = (props) => {
         setRadio3(true);
         setRadio2(false);
         setRadio1(false);
-        setType('image');
+        setType('image/jpeg');
       }else{
         setRadio3(false);
         setType(null);
