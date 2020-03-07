@@ -1,22 +1,25 @@
 /* eslint-disable linebreak-style */
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {View, Text, Header, Container, Content, Form, Button,Body, Left, Right, ListItem, Radio,} from 'native-base';
-import {AsyncStorage, Image} from 'react-native';
+import {AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
 import FormTextInput from '../components/FormTextInput';
 import useUploadForm from '../hooks/UploadHooks';
 import  * as DocumentPicker from 'expo-document-picker';
-import * as ImagePicker from 'expo-image-picker';
 import * as Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
+import {MediaContext} from '../contexts/MediaContext'
+import getAllMedia from '../hooks/APIHook';
+
+
 
 
 
 const Upload = (props) => {
 
+    const {media, setMedia} = useContext(MediaContext);
     const [radio1, setRadio1] = useState(false);
     const [radio2, setRadio2] = useState(false);
-    const [radio3, setRadio3] = useState(false);
 
     const [type, setType] = useState ({});
 
@@ -24,14 +27,16 @@ const Upload = (props) => {
 
 
     const {inputs, handleTitleChange,
-        handleDescChange} = useUploadForm();
+        handleDescChange, handleUpload} = useUploadForm();
+
+
+        
 
 
     const AudioRadio = () => {
       if(radio1 == false){
         setRadio1(true);
         setRadio2(false);
-        setRadio3(false);
         setType('audio/mp3');
       }else{
         setRadio1(false);
@@ -42,54 +47,14 @@ const Upload = (props) => {
       if(radio2 == false){
         setRadio2(true);
         setRadio1(false);
-        setRadio3(false);
         setType('video/mp4');
       }else{
         setRadio2(false);
         setType(null);
       }
     }
-    const ImageRadio = () => {
-      if(radio3 == false){
-        setRadio3(true);
-        setRadio2(false);
-        setRadio1(false);
-        setType('image/jpeg');
-      }else{
-        setRadio3(false);
-        setType(null);
-      }
-    }
-
-       const componentDidMount = () => {
-            getPermissionAsync();
-            console.log('hi');
-          }
 
 
-        const getPermissionAsync = async () => {
-            if(Constants.platform.ios){
-                const status = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-                console.log(status + 'status');
-                if(status !== 'granted') {
-                    alert('sorry blaablaa gibe permission');
-                }
-            }
-        }
-
-    /*    const pickImage = async () => {
-            componentDidMount();
-
-            let result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.All,
-                allowsEditing: true,
-                aspect: [4, 3],
-                quality: 1,
-            });
-        console.log(result);
-        console.log(result.uri);
-        setImage(result);
-        }; */
         const pickFile = async () => {
           let result = await DocumentPicker.getDocumentAsync({
           });
@@ -97,6 +62,7 @@ const Upload = (props) => {
           setFile(result);
         }
 
+/*
         const handleUpload = async () => {
             try {
             console.log('file', file);
@@ -132,11 +98,18 @@ const Upload = (props) => {
         } catch(e){
             console.log(e);
           };
-          console.log(props);
-          props.navigation.navigate('App');
+
+          console.log('navigation props', props.navigation);
+          const newdata = await getAllMedia();
+          setMedia(newdata.reverse());
+          props.navigation.navigate('Home');
         };
 
+*/
 
+const upload = () => {
+  handleUpload(file, props.navigation, setMedia, type);
+};
     return(
 
         <Container>
@@ -167,21 +140,6 @@ const Upload = (props) => {
               />
             </Right>
           </ListItem>
-          <ListItem selected={radio3} onPress={ImageRadio}>
-            <Left>
-              <Text>Image</Text>
-            </Left>
-            <Right>
-              <Radio
-                color={"#f0ad4e"}
-                selectedColor={"#5cb85c"}
-                selected={radio3}
-              />
-            </Right>
-          </ListItem>
-            <Image style ={{height: 100, width: 100}}
-            source={file !== null && {uri: file.uri}}
-            />
             <Form>
             
             <Button rounded light
@@ -205,7 +163,7 @@ const Upload = (props) => {
             />
             <Button
             title="send img"
-            onPress={handleUpload}
+            onPress={upload}
             />
             </Form>
             </Content>

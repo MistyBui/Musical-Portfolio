@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import validate from 'validate.js';
 import validation from '../components/validation';
+import {AsyncStorage} from 'react-native';
+import {getAllMedia} from '../hooks/APIHook'
 
 const useUploadForm = () => {
 
@@ -25,11 +27,53 @@ const useUploadForm = () => {
         }));
     };
 
+    const handleUpload = async (file, navigation, setMedia, type) => {
+      try {
+      console.log(file, type);
+
+      
+    const token = await AsyncStorage.getItem('userToken');
+    console.log(token);
+
+        let localUri = file.uri;
+        let filename = file.name;
+
+        let formData = new FormData();
+        
+  // Assume "photo" is the name of the form field the server expects
+  formData.append('file', { uri: localUri, name: filename, type: type});
+  formData.append('title', inputs.title);
+  formData.append('description', inputs.description);
+
+  console.log(formData);
+
+      const response = await fetch('http://media.mw.metropolia.fi/wbma/media', {
+        method: 'POST',
+        headers: {
+          'x-access-token' : token,
+          'content-type': 'multipart/form-data',
+      },
+        body: formData,
+      });
+      const result = await response.json();
+      console.log(result);
+      
+      console.log('ohitus');
+      const newdata = await getAllMedia();
+      setMedia(newdata.reverse());
+      navigation.push('Home');
+  } catch(e){
+      console.log(e);
+    };
+
+  };
+
 
     return {
       handleTitleChange,
       handleDescChange,
       inputs,
+      handleUpload,
     };
   };
 

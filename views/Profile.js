@@ -8,11 +8,13 @@ import {
   Body,
   Button,
   Icon,
+  BaseList,
 } from 'native-base';
 import {AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
 import {fetchGET, getCurrentUser} from '../hooks/APIHook';
 import AsyncImage from '../components/AsyncImage';
+import ProfileList from '../components/ProfileList'
 import {Dimensions} from 'react-native';
 import {mediaURL} from '../constants/urlConst';
 import {getUserMedia, getFavourites} from '../hooks/APIHook';
@@ -23,7 +25,9 @@ const deviceHeight = Dimensions.get('window').height;
 
 
 const Profile = (props) => {
+  const {navigation} = props;
   const {favMedia, setFavMedia} = useContext(MediaContext);
+  const [posts, setPosts] = useState({});
   const [user, setUser] = useState({
     userdata: {},
     avatar: 'https://',
@@ -44,6 +48,7 @@ const Profile = (props) => {
       const data= await getUserMedia(token);
       const favList = await getFavourites();
       setFavMedia(favList);
+      setPosts(data);
       setUser((user) => (
         {
           userdata: userData,
@@ -124,6 +129,7 @@ const Profile = (props) => {
             </Body>
           </CardItem>
         </Card>
+        <ProfileList navigation ={navigation}/>
       </Content>
       <NavigationEvents
         onDidBlur={ () => {
