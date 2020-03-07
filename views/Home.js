@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 import React, {useState} from 'react';
 import List from '../components/List';
@@ -51,7 +52,7 @@ const Home = (props) => {
           <Button
             transparent
             onPress={() => clearSearch()}>
-            <Icon name='trash'/>
+            <Icon name='close'/>
           </Button>
         </Item>
       </Header>

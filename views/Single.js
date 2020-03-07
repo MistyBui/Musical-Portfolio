@@ -34,6 +34,8 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 const deviceHeight = Dimensions.get('window').height;
 
 const Single = (props) => {
+console.log(props);
+
   const {navigation} = props;
   const {commentMedia, setCommentMedia} = useContext(MediaContext);
   const {favMedia, setFavMedia} = useContext(MediaContext);
@@ -191,7 +193,7 @@ const Single = (props) => {
               volumn={1.0}
               isMuted={false}
               resizeMode='contain'
-              // shouldPlay
+              //shouldPlay
               isLooping
               useNativeControls
               style={{width: '100%', height: deviceHeight/2}}

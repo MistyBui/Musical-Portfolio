@@ -14,6 +14,7 @@ import Upload from '../views/Upload';
 import AuthLoading from '../views/AuthLoading';
 import Login from '../views/Login';
 import Search from '../views/Search';
+import Modify from '../views/Modify';
 import ModifyUser from '../views/ModifyUser';
 import Favourites from '../views/Favourites';
 import {Icon} from 'native-base';
@@ -65,12 +66,9 @@ const StackNavigator = createStackNavigator(
     Single: {
       screen: Single,
     },
-    /* MyFiles: {
-      screen: MyFiles,
-    },
     Modify: {
       screen: Modify,
-    },*/
+    },
     Search: {
       screen: Search,
     },

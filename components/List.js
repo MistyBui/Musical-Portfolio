@@ -5,7 +5,7 @@ import {
 } from 'native-base';
 import ListItem from './ListItem';
 import {MediaContext} from '../contexts/MediaContext';
-import {getAllMedia, getUserMedia} from '../hooks/APIHook';
+import {getMediaByTag, getUserMedia} from '../hooks/APIHook';
 import PropTypes from 'prop-types';
 import {AsyncStorage} from 'react-native';
 import {NavigationEvents} from 'react-navigation';
@@ -18,7 +18,7 @@ const List = (props) => {
     try {
       let data = [];
       if (mode === 'all') {
-        data = await getAllMedia();
+        data = await getMediaByTag();
       } else {
         const token = await AsyncStorage.getItem('userToken');
         data= await getUserMedia(token);
