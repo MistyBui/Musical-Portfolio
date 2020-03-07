@@ -38,6 +38,7 @@ const fetchPOST = async (endpoint = '', data = {}, token = '') => {
   return json;
 };
 
+
 const fetchPUT = async (endpoint = '', data = {}, token = '') => {
   const fetchOptions = {
     method: 'PUT',
@@ -62,12 +63,23 @@ const fetchPUT = async (endpoint = '', data = {}, token = '') => {
 
 // get all media
 const getAllMedia = async () => {
+  console.log('getallmedia');
   const json = await fetchGET('media/all');
   const result = await Promise.all(json.files.map(async (item) => {
     return await fetchGET('media', item.file_id);
   }));
   return result;
 };
+
+const getMediaByTag = async () => {
+  console.log('gettagmedia');
+  const json = await fetchGET('tags/musicalportfolio');
+  console.log('getmediasjson', json);
+  const result = await Promise.all(json.map( async (item) => {
+    return await fetchGET('media', item.file_id);
+  }));
+  return result;
+}
 
 // get media of each user
 const getUserMedia = async (token) => {
@@ -184,7 +196,7 @@ const getAllFav = async () => {
   return result;
 };
 
-export {getAllMedia,
+export {getAllMedia, getMediaByTag,
   getUser, fetchGET, fetchPOST, fetchFormData,
   getUserMedia, fetchDELETE, fetchPUT,
   getSearchedMedia, getUserList,

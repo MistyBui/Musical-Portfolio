@@ -2,7 +2,7 @@ import {useState} from 'react';
 import validate from 'validate.js';
 import validation from '../components/validation';
 import {AsyncStorage} from 'react-native';
-import {getAllMedia} from '../hooks/APIHook'
+import {getAllMedia, getMediaByTag} from '../hooks/APIHook'
 
 const useUploadForm = () => {
 
@@ -56,10 +56,22 @@ const useUploadForm = () => {
         body: formData,
       });
       const result = await response.json();
-      console.log(result);
+      console.log('result id', result.file_id);
+
+      let tag = {file_id: result.file_id, tag: 'musicalportfolio'}
+
+      const putTag = await fetch('http://media.mw.metropolia.fi/wbma/tags', {
+        method: 'POST',
+        headers: {
+          'x-access-token' : token,
+          'content-type': 'application/json',
+      },
+        body: JSON.stringify(tag),
+      });
+      const getTag = await putTag.json();
+      console.log('tag', getTag);
       
-      console.log('ohitus');
-      const newdata = await getAllMedia();
+      const newdata = await getMediaByTag();
       setMedia(newdata.reverse());
       navigation.push('Home');
   } catch(e){
