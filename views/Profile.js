@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import React, {useEffect, useState, useContext} from 'react';
 import {
   Container,
@@ -8,18 +9,19 @@ import {
   Body,
   Button,
   Icon,
-  BaseList,
+  View,
 } from 'native-base';
 import {AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
 import {fetchGET, getCurrentUser} from '../hooks/APIHook';
 import AsyncImage from '../components/AsyncImage';
-import ProfileList from '../components/ProfileList'
+import ProfileList from '../components/ProfileList';
 import {Dimensions} from 'react-native';
 import {mediaURL} from '../constants/urlConst';
 import {getUserMedia, getFavourites} from '../hooks/APIHook';
 import {NavigationEvents} from 'react-navigation';
 import {MediaContext} from '../contexts/MediaContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const deviceHeight = Dimensions.get('window').height;
 
@@ -72,7 +74,7 @@ const Profile = (props) => {
 
   console.log('ava', user.avatar);
   return (
-    <Container>
+    <SafeAreaView style={{flex: 1}}>
       <Content contentContainerStyle={{flex: 1, justifyContent: 'center'}}
         style={{padding: 20}}>
         <Card>
@@ -129,7 +131,9 @@ const Profile = (props) => {
             </Body>
           </CardItem>
         </Card>
-        <ProfileList navigation ={navigation}/>
+        <View>
+          <ProfileList navigation ={navigation} mode={'all'}></ProfileList>
+        </View>
       </Content>
       <NavigationEvents
         onDidBlur={ () => {
@@ -137,7 +141,7 @@ const Profile = (props) => {
         }
         }
       />
-    </Container>
+    </SafeAreaView>
   );
 };
 

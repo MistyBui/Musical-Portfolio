@@ -156,6 +156,12 @@ const getUserList = async () => {
   }
 };
 
+const deleteFile = (item) => {
+  fetchDELETE(apiUrl + 'media/' + item.file_id).then((json) => {
+    console.log(json);
+  });
+};
+
 // get like of a file
 const getFileLike = async (id) => {
   const list = await fetchGET('favourites/file', id, '');
@@ -183,5 +189,5 @@ export {getAllMedia,
   getUserMedia, fetchDELETE, fetchPUT,
   getSearchedMedia, getUserList,
   getFileComment, getCurrentUser, getFileLike,
-  getFavourites, getAllFav,
+  getFavourites, getAllFav, deleteFile,
 };
