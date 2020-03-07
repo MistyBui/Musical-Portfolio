@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
 import React, {useEffect, useState, useContext} from 'react';
 import {
   Container,
@@ -21,7 +22,7 @@ import {mediaURL} from '../constants/urlConst';
 import {getUserMedia, getFavourites} from '../hooks/APIHook';
 import {NavigationEvents} from 'react-navigation';
 import {MediaContext} from '../contexts/MediaContext';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const deviceHeight = Dimensions.get('window').height;
 
@@ -74,7 +75,7 @@ const Profile = (props) => {
 
   console.log('ava', user.avatar);
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <Container style={{flex: 1}}>
       <Content contentContainerStyle={{flex: 1, justifyContent: 'center'}}
         style={{padding: 20}}>
         <Card>
@@ -141,7 +142,7 @@ const Profile = (props) => {
         }
         }
       />
-    </SafeAreaView>
+    </Container>
   );
 };
 

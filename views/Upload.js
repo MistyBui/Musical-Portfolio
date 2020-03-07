@@ -3,11 +3,9 @@
 /* eslint-disable linebreak-style */
 import React, {useState, useContext} from 'react';
 import {Text, Container, Content, Form,
-  Button, Left, Right, ListItem, Radio} from 'native-base';
-import {AsyncStorage} from 'react-native';
-import PropTypes from 'prop-types';
+  Button, Left, Right, ListItem, Radio, H1} from 'native-base';
 import FormTextInput from '../components/FormTextInput';
-import useUploadForm from '../hooks/UploadHooks';
+import useUploadForm from '../hooks/UploadHook';
 import * as DocumentPicker from 'expo-document-picker';
 import {MediaContext} from '../contexts/MediaContext';
 
@@ -18,7 +16,7 @@ const Upload = (props) => {
   const [type, setType] = useState({});
   const [file, setFile] = useState(null);
   const {inputs, handleTitleChange,
-    handleDescChange, handleUpload} = useUploadForm();
+    handleDescChange, handleUpload, setInputs} = useUploadForm();
 
   const AudioRadio = () => {
     if (radio1 == false) {
@@ -51,12 +49,21 @@ const Upload = (props) => {
 
   const upload = () => {
     handleUpload(file, props.navigation, setMedia, type);
+    reset();
   };
+
+  const reset = () => {
+    setFile('');
+    setRadio1(false);
+    setRadio2(false);
+    setInputs('');
+  };
+
   return (
 
     <Container>
       <Content>
-        <Text>upload</Text>
+        <H1 style={{padding: 10, alignSelf: 'center'}}>Upload</H1>
 
         <ListItem selected={radio1} onPress={AudioRadio}>
           <Left>
@@ -87,12 +94,12 @@ const Upload = (props) => {
           <Button rounded light
             style={{padding: 10, alignSelf: 'center'}}
             onPress={pickFile}>
-            <Text>Pick a file</Text>
+            <Text>Choose file</Text>
           </Button>
 
           <FormTextInput
             autoCapitalize='none'
-            placeholder='title'
+            placeholder='Enter title'
             value={inputs.title}
             onChangeText={handleTitleChange}
           />
@@ -100,14 +107,17 @@ const Upload = (props) => {
             <Text>{inputs.titleError.title[0]}</Text>}
           <FormTextInput
             autoCapitalize='none'
-            placeholder='description'
+            placeholder='Enter description'
             value={inputs.description}
             onChangeText={handleDescChange}
           />
-          <Button
-            title="send img"
+          <Button rounded
+            title="Upload"
+            style={{padding: 10, alignSelf: 'center'}}
             onPress={upload}
-          />
+          >
+            <Text>Upload</Text>
+          </Button>
         </Form>
       </Content>
     </Container>

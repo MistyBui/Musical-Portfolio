@@ -17,7 +17,7 @@ import {mediaURL} from '../constants/urlConst';
 import {getUser, deleteFile} from '../hooks/APIHook';
 
 const ProfileListItem = (props) => {
-  const {navigation, singleMedia} = props;
+  const {singleMedia} = props;
   const [owner, setOwner] = useState({});
   const getOwner = async () => {
     const ownerName = await getUser(props.singleMedia.user_id);

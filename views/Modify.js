@@ -1,12 +1,11 @@
 /* eslint-disable linebreak-style */
-import React, {useState, useContext, useEffect} from 'react';
-import {View, Text, Header, Container, Content, Form, Button, Body, Left, Right, ListItem, Radio} from 'native-base';
-import {AsyncStorage} from 'react-native';
+/* eslint-disable no-unused-vars */
+import React, {useContext} from 'react';
+import {Text, Container, Content, Form, Button} from 'native-base';
 import PropTypes from 'prop-types';
 import FormTextInput from '../components/FormTextInput';
-import useUploadForm from '../hooks/UploadHooks';
+import useUploadForm from '../hooks/UploadHook';
 import {MediaContext} from '../contexts/MediaContext';
-import getAllMedia from '../hooks/APIHook';
 
 
 const Modify = (props) => {
@@ -29,7 +28,8 @@ const Modify = (props) => {
             value={inputs.title}
             onChangeText={handleTitleChange}
           />
-          {inputs.titleError !== undefined && <Text>{inputs.titleError.title[0]}</Text>}
+          {inputs.titleError !== undefined &&
+            <Text>{inputs.titleError.title[0]}</Text>}
           <FormTextInput
             autoCapitalize='none'
             placeholder='description'

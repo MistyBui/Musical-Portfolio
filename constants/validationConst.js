@@ -40,7 +40,7 @@ const registerConstraints = {
 const uploadConstraints = {
   title: {
     presence: {
-      message: 'Enter title.',
+      message: 'Please enter a title',
     },
     length: {
       minimum: 3,

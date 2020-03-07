@@ -1,13 +1,15 @@
 import {useState} from 'react';
 import validate from 'validate.js';
-import validation from '../components/validation';
+import {uploadConstraints} from '../constants/validationConst';
 import {AsyncStorage} from 'react-native';
 import {getMediaByTag} from '../hooks/APIHook';
 
 const useUploadForm = () => {
   const [inputs, setInputs] = useState({});
+
   const handleTitleChange = (text) => {
-    const error = validate({title: inputs.title}, {title: validation.title});
+    const error = validate({title: inputs.title},
+        {title: uploadConstraints.title});
     console.log(error);
     setInputs((inputs) =>
       ({
@@ -72,12 +74,12 @@ const useUploadForm = () => {
     }
   };
 
-
   return {
     handleTitleChange,
     handleDescChange,
     inputs,
     handleUpload,
+    setInputs,
   };
 };
 
