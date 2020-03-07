@@ -40,7 +40,7 @@ const registerConstraints = {
 const uploadConstraints = {
   title: {
     presence: {
-      message: 'cannot be blank.',
+      message: 'Enter title.',
     },
     length: {
       minimum: 3,

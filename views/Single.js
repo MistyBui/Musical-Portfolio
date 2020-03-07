@@ -191,7 +191,7 @@ const Single = (props) => {
               volumn={1.0}
               isMuted={false}
               resizeMode='contain'
-              shouldPlay
+              // shouldPlay
               isLooping
               useNativeControls
               style={{width: '100%', height: deviceHeight/2}}

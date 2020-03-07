@@ -32,10 +32,17 @@ const ListItem = (props) => {
       thumbnail
     >
       <Left>
+        {props.singleMedia.media_type === 'audio' ? (
+          <Thumbnail
+            square
+            source= {{uri: 'https://i.picsum.photos/id/1082/5416/3611.jpg'}}
+          />
+        ) : (
         <Thumbnail
           square
-          source={{uri: mediaURL + props.singleMedia.filename}}
+          source= {{uri: mediaURL + props.singleMedia.thumbnails.w160}}
         />
+        )}
       </Left>
       <Body>
         <H3 numberOfLines={1}>{props.singleMedia.title}</H3>
