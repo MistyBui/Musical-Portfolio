@@ -15,16 +15,19 @@ import {
   Body,
 } from 'native-base';
 import ListItem from '../components/ListItem';
+import {NavigationEvents} from 'react-navigation';
 
 const Favourites = (props) => {
+  console.log('favourie page load');
   const {navigation} = props;
   const [loading, setLoading] = useState(true);
   const {favMedia, setFavMedia} = useContext(MediaContext);
   const [exist, setExist] = useState(true);
 
-
+  console.log('fav loading');
   const getList = async () => {
     const list = await getAllFav();
+    console.log('fav lenght', list.length);
     if (list.length > 0) {
       setExist(true);
       setFavMedia(list.reverse());
@@ -68,6 +71,12 @@ const Favourites = (props) => {
         </CardItem>
       </Card>
     )}
+      <NavigationEvents
+        onDidBlur={ () => {
+          getList();
+        }
+        }
+      />
     </Container>
   );
 };

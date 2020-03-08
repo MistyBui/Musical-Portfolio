@@ -8,6 +8,7 @@ import {
   Spinner,
   Button,
   Text,
+  Card,
 } from 'native-base';
 import useSignUpForm from '../hooks/LoginHook';
 import FormTextInput from '../components/FormTextInput';
@@ -16,10 +17,13 @@ import {validateField} from '../utils/validation';
 import {modifyConstraints} from '../constants/validationConst';
 import {fetchPUT, getCurrentUser} from '../hooks/APIHook';
 import {AsyncStorage} from 'react-native';
-
+import * as ImagePicker from 'expo-image-picker';
+import useUploadForm from '../hooks/UploadHook';
 
 const ModifyUser = (props) => {
   const [send, setSend] = useState(false);
+  const [image, setImage] = useState(null);
+
   const {
     handlePasswordChange,
     handleConfirmPasswordChange,
@@ -30,6 +34,10 @@ const ModifyUser = (props) => {
     setInputs,
     loading,
   } = useSignUpForm();
+
+  const {
+    handleAvatar,
+  } = useUploadForm();
 
   const validationProperties = {
     email: {email: inputs.email},
@@ -88,6 +96,26 @@ const ModifyUser = (props) => {
       alert('Update fail. Contact admin.');
     }
     return update;
+  };
+
+  const pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.3,
+      exif: true,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result);
+    }
+  };
+
+  const upload = () => {
+    handleAvatar(image);
   };
 
   const reset = () => {
@@ -165,6 +193,16 @@ const ModifyUser = (props) => {
                 }}>
                 <Text>Save</Text>
               </Button>
+            </CardItem>
+            <CardItem>
+              <Button full onPress={pickImage}>
+                <Text>Change avatar</Text>
+              </Button>
+              {image && send &&
+          <Button full onPress={upload}>
+            <Text>Upload</Text>
+          </Button>
+              }
             </CardItem>
             <Button full danger
               style={{padding: 10, alignSelf: 'center', borderRadius: 50}}

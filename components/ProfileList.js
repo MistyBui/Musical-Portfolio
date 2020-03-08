@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable linebreak-style */
 import React, {useContext, useEffect, useState} from 'react';
 import {
@@ -5,7 +6,7 @@ import {
 } from 'native-base';
 import ProfileListItem from '../components/ProfileListItem';
 import {MediaContext} from '../contexts/MediaContext';
-import {getUserMedia} from '../hooks/APIHook';
+import {getUserMedia, getCurrentUser, fetchGET} from '../hooks/APIHook';
 import PropTypes from 'prop-types';
 import {AsyncStorage} from 'react-native';
 import {NavigationEvents} from 'react-navigation';
@@ -16,9 +17,20 @@ const ProfileList = (props) => {
 
   const getMedia = async () => {
     try {
-      let data = [];
+      /* let data = [];
       const token = await AsyncStorage.getItem('userToken');
-      data = await getUserMedia(token);
+      data = await getUserMedia(token);*/
+      const list = await fetchGET('tags/musicalportfolio');
+      console.log('profile23', list);
+
+      const user = await getCurrentUser();
+      console.log('user', user.user_id);
+
+      const data = list.filter((item) => {
+        console.log('indata', item.user_id);
+        return item.user_id == user.user_id;
+      });
+
 
       console.log(data);
       setUserMedia(data.reverse());
@@ -30,7 +42,7 @@ const ProfileList = (props) => {
   };
 
   useEffect(() => {
-    getMedia(props.mode);
+    getMedia();
   }, []);
 
   return (
@@ -49,13 +61,6 @@ const ProfileList = (props) => {
               />}
             />
         )}
-      <NavigationEvents
-        onDidBlur={ () => {
-          if (props.mode !=='all') {
-            getMedia('all');
-          }
-        }}
-      />
     </View>
   );
 };

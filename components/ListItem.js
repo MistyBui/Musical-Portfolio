@@ -13,7 +13,7 @@ import {
   H3, Icon,
 } from 'native-base';
 import PropTypes from 'prop-types';
-import {mediaURL} from '../constants/urlConst';
+// import {mediaURL} from '../constants/urlConst';
 import {getUser} from '../hooks/APIHook';
 
 const ListItem = (props) => {
@@ -40,7 +40,7 @@ const ListItem = (props) => {
         ) : (
         <Thumbnail
           square
-          source= {{uri: mediaURL + props.singleMedia.thumbnails.w160}}
+          source= {{uri: 'https://i.picsum.photos/id/1025/4951/3301.jpg'}}
         />
         )}
       </Left>
@@ -72,26 +72,3 @@ ListItem.propTypes = {
 };
 
 export default ListItem;
-
-
-/* <BaseListItem thumbnail>
-      <Left>
-        <Thumbnail
-          square
-          source={{uri: mediaURL + props.singleMedia.thumbnails.w160}}
-        />
-      </Left>
-      <Body>
-        <H3 numberOfLines={1}>{props.singleMedia.title}</H3>
-        <Text numberOfLines={1}>{props.singleMedia.description}</Text>
-      </Body>
-      <Right>
-        <Button onPress={
-          () => {
-            props.navigation.push('Single', {file: props.singleMedia});
-          }
-        }>
-          <Text>View</Text>
-        </Button>
-      </Right>
-    </BaseListItem> */

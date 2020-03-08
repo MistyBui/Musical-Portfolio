@@ -22,7 +22,6 @@ import {mediaURL} from '../constants/urlConst';
 import {getUserMedia, getFavourites} from '../hooks/APIHook';
 import {NavigationEvents} from 'react-navigation';
 import {MediaContext} from '../contexts/MediaContext';
-import {SafeAreaView} from 'react-native-safe-area-context';
 
 const deviceHeight = Dimensions.get('window').height;
 
@@ -41,16 +40,18 @@ const Profile = (props) => {
     try {
       const userData = await getCurrentUser();
       const avatarPic = await fetchGET('tags', 'avatar_' + userData.user_id);
+      const reversePic = avatarPic.reverse();
       let avPic = '';
       if (avatarPic.length === 0) { // if avatar is not set
         avPic = 'https://placekitten.com/1024/1024';
       } else {
-        avPic = mediaURL + avatarPic[0].filename;
+        avPic = mediaURL + reversePic[0].filename;
       }
       const token = await AsyncStorage.getItem('userToken');
       const data= await getUserMedia(token);
       const favList = await getFavourites();
       setFavMedia(favList);
+      console.log('favelengh', favList.length);
       setPosts(data);
       setUser((user) => (
         {
@@ -76,8 +77,8 @@ const Profile = (props) => {
   console.log('ava', user.avatar);
   return (
     <Container style={{flex: 1}}>
-      <Content contentContainerStyle={{flex: 1, justifyContent: 'center'}}
-        style={{padding: 20}}>
+      <Content /* contentContainerStyle={{flex: 1, justifyContent: 'center'}}
+        style={{padding: 20}}*/>
         <Card>
           <CardItem header border>
             <Body>

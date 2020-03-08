@@ -3,7 +3,7 @@
 /* eslint-disable linebreak-style */
 import React, {useState, useContext} from 'react';
 import {Text, Container, Content, Form,
-  Button, Left, Right, ListItem, Radio, H1} from 'native-base';
+  Button, Left, Right, ListItem, Radio, H1, H6} from 'native-base';
 import FormTextInput from '../components/FormTextInput';
 import useUploadForm from '../hooks/UploadHook';
 import * as DocumentPicker from 'expo-document-picker';
@@ -60,11 +60,9 @@ const Upload = (props) => {
   };
 
   return (
-
     <Container>
-      <Content>
-        <H1 style={{padding: 10, alignSelf: 'center'}}>Upload</H1>
-
+      <Content style={{margin: 25}}>
+        <Text style={{fontSize: 20}}>Choose media type: </Text>
         <ListItem selected={radio1} onPress={AudioRadio}>
           <Left>
             <Text>Audio/mp3</Text>
@@ -89,6 +87,7 @@ const Upload = (props) => {
             />
           </Right>
         </ListItem>
+        <Text style={{fontSize: 20}}>Choose file: </Text>
         <Form>
 
           <Button rounded light
@@ -96,6 +95,7 @@ const Upload = (props) => {
             onPress={pickFile}>
             <Text>Choose file</Text>
           </Button>
+          <Text style={{fontSize: 20}}>Insert information: </Text>
 
           <FormTextInput
             autoCapitalize='none'

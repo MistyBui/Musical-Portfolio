@@ -2,7 +2,8 @@ import {useState} from 'react';
 import validate from 'validate.js';
 import {uploadConstraints} from '../constants/validationConst';
 import {AsyncStorage} from 'react-native';
-import {getMediaByTag} from '../hooks/APIHook';
+import {getMediaByTag, fetchPOST,
+  fetchFormData, getCurrentUser} from '../hooks/APIHook';
 
 const useUploadForm = () => {
   const [inputs, setInputs] = useState({});
@@ -74,12 +75,45 @@ const useUploadForm = () => {
     }
   };
 
+  const handleAvatar = async (file) => {
+    const filename = file.uri.split('/').pop();
+    const match = /\.(\w+)$/.exec(filename);
+    let type = match ? `image/${match[1]}` : `image`;
+    // fix jpg mimetype
+    if (type === 'image/jpg') {
+      type = 'image/jpeg';
+    }
+    const fd = new FormData();
+    fd.append('file', {uri: file.uri, name: filename, type});
+    console.log('FD:', fd);
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+      const user = await getCurrentUser();
+      const resp = await fetchFormData('media', fd, token);
+      console.log('upl resp', resp);
+      if (resp.message =='File uploaded') {
+        const tag = {file_id: resp.file_id, tag: 'avatar_' + user.user_id};
+        const tagFile = await fetchPOST('tags', tag, token);
+        console.log('tag', tagFile);
+        if (tagFile.message=='Tag added') {
+          alert('Update success. Please log out');
+        } else {
+          alert('Update failed. Contact admin');
+        }
+      } else {
+        alert('Upload failed');
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
   return {
     handleTitleChange,
     handleDescChange,
     inputs,
     handleUpload,
     setInputs,
+    handleAvatar,
   };
 };
 
