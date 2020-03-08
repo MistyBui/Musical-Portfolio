@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable eol-last */
@@ -10,10 +11,11 @@ import {
   Button,
   Text,
   Thumbnail,
-  H3, Icon, Alert, CardItem,
+  H3, Icon, CardItem,
 } from 'native-base';
+import {Alert} from 'react-native';
 import PropTypes from 'prop-types';
-import {mediaURL} from '../constants/urlConst';
+// import {mediaURL} from '../constants/urlConst';
 import {deleteFile} from '../hooks/APIHook';
 
 const ProfileListItem = (props) => {
@@ -51,12 +53,13 @@ const ProfileListItem = (props) => {
                     [
                       {
                         text: 'Ok',
-                        onPress: () => {
-                          deleteFile(singleMedia.file_id),
-                          props.navigation.navigate('Loading'),
-                          setTimeout(() => {
-                            props.navigation.push('MyFiles');
-                          }, 500);
+                        onPress: async () => {
+                          const response = await
+                          deleteFile(singleMedia.file_id);
+                          console.log('deleteclick', response);
+                          if (response.message) {
+                            props.getMedia();
+                          }
                         },
                       },
                       {

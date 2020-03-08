@@ -56,7 +56,6 @@ const ProfileList = (props) => {
               renderItem={({item}) => <ProfileListItem
                 navigation={props.navigation}
                 singleMedia={item}
-                mode={props.mode}
                 getMedia={getMedia}
               />}
             />

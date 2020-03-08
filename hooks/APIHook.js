@@ -168,10 +168,11 @@ const getUserList = async () => {
   }
 };
 
-const deleteFile = (item) => {
-  fetchDELETE(apiUrl + 'media/' + item.file_id).then((json) => {
-    console.log(json);
-  });
+const deleteFile = async (id) => {
+  const token = await AsyncStorage.getItem('userToken');
+  const result = await fetchDELETE('media', id, token);
+  console.log(result);
+  return result;
 };
 
 // get like of a file
