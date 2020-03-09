@@ -1,30 +1,52 @@
+/* eslint-disable linebreak-style */
 import {useState} from 'react';
-import validate from 'validate.js';
-import {uploadConstraints} from '../constants/validationConst';
 import {AsyncStorage} from 'react-native';
-import {getMediaByTag, fetchPOST,
+import {getMediaByTag, getUserMedia, fetchPOST, fetchPUT,
   fetchFormData, getCurrentUser} from '../hooks/APIHook';
 
 const useUploadForm = () => {
   const [inputs, setInputs] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleTitleChange = (text) => {
-    const error = validate({title: inputs.title},
-        {title: uploadConstraints.title});
-    console.log(error);
     setInputs((inputs) =>
       ({
         ...inputs,
         title: text,
-        titleError: error,
       }));
   };
+
   const handleDescChange = (text) => {
     setInputs((inputs) =>
       ({
         ...inputs,
         description: text,
       }));
+  };
+
+  const handleModify = async (id, navigation, setMedia) => {
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+      console.log('1: ', id);
+      console.log('2: ', inputs);
+      console.log('3: ', token);
+      const resp = await fetchPUT('media', id, inputs, token);
+
+      console.log('upl resp', resp);
+
+      if (resp.message) {
+        const data = await getUserMedia(token);
+        setMedia((media) =>
+          ({
+            ...media,
+            myFiles: data,
+          }));
+        setLoading(false);
+        navigation.pop();
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   const handleUpload = async (file, navigation, setMedia, type) => {
@@ -110,10 +132,12 @@ const useUploadForm = () => {
   return {
     handleTitleChange,
     handleDescChange,
+    handleModify,
     inputs,
     handleUpload,
     setInputs,
     handleAvatar,
+    loading,
   };
 };
 

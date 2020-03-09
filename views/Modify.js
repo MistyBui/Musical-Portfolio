@@ -1,45 +1,90 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
-import React, {useContext} from 'react';
-import {Text, Container, Content, Form, Button} from 'native-base';
-import PropTypes from 'prop-types';
+import React, {useState, useEffect, useContext} from 'react';
+import {Text, Container, Content, Form,
+  Button, Left, Right, ListItem, H1, H6} from 'native-base';
 import FormTextInput from '../components/FormTextInput';
 import useUploadForm from '../hooks/UploadHook';
+import {validateField} from '../utils/validation';
 import {MediaContext} from '../contexts/MediaContext';
+import PropTypes from 'prop-types';
+
+import {mediaURL} from '../constants/urlConst';
+import {Video} from 'expo-av';
+import {Dimensions} from 'react-native';
+const deviceHeight = Dimensions.get('window').height;
 
 
 const Modify = (props) => {
   const {media, setMedia} = useContext(MediaContext);
+  const [send, setSend] = useState(false);
 
   const {inputs, handleTitleChange,
-    handleDescChange, handleUpload} = useUploadForm();
+    handleDescChange, handleUpload,
+    setInputs, handleModify, errors} = useUploadForm();
+
+  const validationProperties = {
+    title: {title: inputs.title},
+    description: {description: inputs.description},
+  };
+
+  const validate = (field, value) => {
+    console.log('vp', validationProperties[field]);
+  };
+
+  const file = props.navigation.state.params.file;
+
+  useEffect(() => {
+    setInputs((inputs) =>
+      ({
+        ...inputs,
+        title: file.title,
+        description: file.description,
+      }));
+  }, []);
+
+  const handleTitle = (text) => {
+    handleTitleChange(text);
+    validate('title', text);
+  };
+
+  const handleDesc = (text) => {
+    handleDescChange(text);
+    validate('description', text);
+  };
 
   const modify = () => {
-    handleUpload(props.navigation, setMedia);
+    console.log('modifying file...');
+    handleModify(file.file_id, props.navigation, setMedia);
   };
+
   return (
     <Container>
-      <Content>
-        <Text>Modify Title and Description here.</Text>
+      <Content style={{margin: 25}}>
+
         <Form>
+          <Text style={{fontSize: 20}}>Insert new information: </Text>
+
           <FormTextInput
             autoCapitalize='none'
-            placeholder='title'
+            placeholder='Enter new title'
             value={inputs.title}
-            onChangeText={handleTitleChange}
+            onChangeText={handleTitle}
           />
           {inputs.titleError !== undefined &&
             <Text>{inputs.titleError.title[0]}</Text>}
           <FormTextInput
             autoCapitalize='none'
-            placeholder='description'
+            placeholder='Enter new description'
             value={inputs.description}
-            onChangeText={handleDescChange}
+            onChangeText={handleDesc}
           />
-          <Button
+          <Button rounded
+            title="Edit"
+            style={{padding: 10, alignSelf: 'center'}}
             onPress={modify}
           >
-            <Text>Edit</Text>
+            <Text>Confirm Edit</Text>
           </Button>
         </Form>
       </Content>
@@ -52,3 +97,4 @@ Modify.propTypes = {
 };
 
 export default Modify;
+

@@ -39,7 +39,8 @@ const fetchPOST = async (endpoint = '', data = {}, token = '') => {
 };
 
 
-const fetchPUT = async (endpoint = '', data = {}, token = '') => {
+const fetchPUT = async (endpoint = '', params = '', data = {}, token = '') => {
+  console.log('data: ', data);
   const fetchOptions = {
     method: 'PUT',
     headers: {
@@ -48,7 +49,7 @@ const fetchPUT = async (endpoint = '', data = {}, token = '') => {
     },
     body: JSON.stringify(data),
   };
-  const response = await fetch(apiUrl + endpoint, fetchOptions);
+  const response = await fetch(apiUrl + endpoint + '/' + params, fetchOptions);
   const json = await response.json();
   console.log('apihook', json);
   if (response.status === 400 || response.status === 401) {
@@ -151,7 +152,6 @@ const fetchDELETE = async (endpoint = '', params = '', token = '') => {
   const response = await fetch(apiUrl + endpoint + '/' + params,
       fetchOptions);
   if (!response.ok) {
-    alert('You are not allowed to delete!!!');
     throw new Error('fetchDELETE error: ' + response.status);
   }
   return await response.json();

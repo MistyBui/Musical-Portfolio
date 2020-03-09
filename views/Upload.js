@@ -1,6 +1,6 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-/* eslint-disable linebreak-style */
 import React, {useState, useContext} from 'react';
 import {Text, Container, Content, Form,
   Button, Left, Right, ListItem, Radio, H1, H6} from 'native-base';
