@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable eol-last */
 import React from 'react';
@@ -8,43 +8,50 @@ import {
   Left,
   Body,
   Right,
-  Button,
-  Text,
   Thumbnail,
+  Text,
   H3, Icon, CardItem,
 } from 'native-base';
-import {Alert} from 'react-native';
 import PropTypes from 'prop-types';
 // import {mediaURL} from '../constants/urlConst';
 import {deleteFile} from '../hooks/APIHook';
+import {Alert} from 'react-native';
 
 const ProfileListItem = (props) => {
   const {singleMedia} = props;
   return (
     <BaseListItem
       thumbnail
+      style={{margin: 5}}
     >
       <Left>
         <Left style={{flex: 0.4}}>
           {props.singleMedia.media_type === 'audio' ? (
           <Thumbnail
             square
-            source= {{uri: 'https://i.picsum.photos/id/1082/5416/3611.jpg'}}
+            source= {{uri: 'https://i.picsum.photos/id/145/4288/2848.jpg'}}
           />
         ) : (
         <Thumbnail
           square
-          source= {{uri: 'https://i.picsum.photos/id/1025/4951/3301.jpg'}}
+          source= {{uri: 'https://i.picsum.photos/id/1082/5416/3611.jpg'}}
         />
         )}
         </Left>
         <Body>
           <H3 numberOfLines={1}>{props.singleMedia.title}</H3>
-          <Text numberOfLines={1}>{props.singleMedia.description}</Text>
+          {props.singleMedia.description != 'undefined' ?
+          (<Text numberOfLines={1}>{props.singleMedia.description}</Text>) :
+          (<Text></Text>)}
+          <Text style={{color: 'gray', fontStyle: 'italic'}}>
+            {props.singleMedia.media_type}
+          </Text>
         </Body>
-        <Right style={{flex: 0.4}}>
+        <Right style={{flex: 1}}>
           <CardItem>
-            <Button
+            <Icon
+              name='ios-trash'
+              style={{color: 'red', fontSize: 25}}
               transparent
               onPress={() => {
                 Alert.alert(
@@ -73,26 +80,22 @@ const ProfileListItem = (props) => {
                 );
               }}
             >
-              <Icon name='trash' style={{color: 'red'}} />
-            </Button>
-            <Button
-              transparent
+            </Icon>
+            <Icon name='ios-construct' style={{color: 'green', fontSize: 25}}
               onPress={
                 () => {
                   props.navigation.push('Modify', {file: props.singleMedia});
                 }
               }>
-              <Icon name='md-construct' style={{color: 'green'}}></Icon>
-            </Button>
-            <Button
-              transparent
+            </Icon>
+            <Icon name='ios-eye' style={{color: 'blue', fontSize: 25}}
               onPress={
                 () => {
                   props.navigation.push('Single', {file: props.singleMedia});
                 }
               }>
-              <Icon name='eye'></Icon>
-            </Button>
+
+            </Icon>
           </CardItem>
         </Right>
       </Left>
@@ -106,26 +109,3 @@ ProfileListItem.propTypes = {
 };
 
 export default ProfileListItem;
-
-
-/* <BaseListItem thumbnail>
-      <Left>
-        <Thumbnail
-          square
-          source={{uri: mediaURL + props.singleMedia.thumbnails.w160}}
-        />
-      </Left>
-      <Body>
-        <H3 numberOfLines={1}>{props.singleMedia.title}</H3>
-        <Text numberOfLines={1}>{props.singleMedia.description}</Text>
-      </Body>
-      <Right>
-        <Button onPress={
-          () => {
-            props.navigation.push('Single', {file: props.singleMedia});
-          }
-        }>
-          <Text>View</Text>
-        </Button>
-      </Right>
-    </BaseListItem> */

@@ -20,6 +20,7 @@ const ListItem = (props) => {
   const [owner, setOwner] = useState({});
   const getOwner = async () => {
     const ownerName = await getUser(props.singleMedia.user_id);
+    console.log('list item', props.singleMedia );
     setOwner(ownerName);
   };
 
@@ -35,20 +36,24 @@ const ListItem = (props) => {
         {props.singleMedia.media_type === 'audio' ? (
           <Thumbnail
             square
-            source= {{uri: 'https://i.picsum.photos/id/1082/5416/3611.jpg'}}
+            source= {{uri: 'https://i.picsum.photos/id/145/4288/2848.jpg'}}
           />
         ) : (
         <Thumbnail
           square
-          source= {{uri: 'https://i.picsum.photos/id/1025/4951/3301.jpg'}}
+          source= {{uri: 'https://i.picsum.photos/id/1082/5416/3611.jpg'}}
         />
         )}
       </Left>
       <Body>
         <H3 numberOfLines={1}>{props.singleMedia.title}</H3>
-        <Text numberOfLines={1}>{props.singleMedia.description}</Text>
-        <Text style={{color: 'gray', fontStyle: 'italic'}}>
-          by {owner.username}
+        {props.singleMedia.description != 'undefined' ?
+        (<Text numberOfLines={1}>{props.singleMedia.description}</Text>) :
+        (<Text></Text>)}
+
+        <Text style={{fontStyle: 'italic'}}>
+          <Text style={{color: 'gray'}}>{props.singleMedia.media_type} </Text>
+          <Text style={{color: 'gray'}}>by {owner.username}</Text>
         </Text>
       </Body>
       <Right>

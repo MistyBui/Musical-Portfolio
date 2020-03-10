@@ -123,7 +123,7 @@ const Profile = (props) => {
                     props.navigation.push('ModifyUser', {func: userToState});
                   }
                 }>
-                <Text>Modify</Text>
+                <Text>Edit Profile</Text>
               </Button>
               <Button
                 rounded success

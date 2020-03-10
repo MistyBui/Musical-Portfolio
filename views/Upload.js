@@ -1,6 +1,6 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-/* eslint-disable linebreak-style */
 import React, {useState, useContext} from 'react';
 import {Text, Container, Content, Form,
   Button, Left, Right, ListItem, Radio, H1, H6} from 'native-base';
@@ -62,7 +62,7 @@ const Upload = (props) => {
   return (
     <Container>
       <Content style={{margin: 25}}>
-        <Text style={{fontSize: 20}}>Choose media type: </Text>
+        <Text style={{fontSize: 20}}>Choose media type:* </Text>
         <ListItem selected={radio1} onPress={AudioRadio}>
           <Left>
             <Text>Audio/mp3</Text>
@@ -87,7 +87,7 @@ const Upload = (props) => {
             />
           </Right>
         </ListItem>
-        <Text style={{fontSize: 20}}>Choose file: </Text>
+        <Text style={{fontSize: 20}}>Choose file:* </Text>
         <Form>
 
           <Button rounded light
@@ -95,7 +95,7 @@ const Upload = (props) => {
             onPress={pickFile}>
             <Text>Choose file</Text>
           </Button>
-          <Text style={{fontSize: 20}}>Insert information: </Text>
+          <Text style={{fontSize: 20}}>Insert information:* </Text>
 
           <FormTextInput
             autoCapitalize='none'
@@ -111,10 +111,18 @@ const Upload = (props) => {
             value={inputs.description}
             onChangeText={handleDescChange}
           />
+          <Text style={{color: 'gray', fontSize: 10}}>* is required</Text>
           <Button rounded
             title="Upload"
             style={{padding: 10, alignSelf: 'center'}}
-            onPress={upload}
+            onPress={()=>{
+              console.log('upload120', inputs.title);
+              if (inputs.title == undefined) {
+                alert('Title is blank');
+              } else {
+                upload();
+              }
+            }}
           >
             <Text>Upload</Text>
           </Button>
