@@ -11,7 +11,7 @@ Bottom tab: Home, Profile, Upload and Favourites
 Stack: Search, Modify Post, Modify User, Single
 
 Dependencies:
-"@react-native-community/masked-view": "0.1.5",
+"@react-native-community/masked-view": "0.1.5", </br>
     "expo": "~36.0.0",
     "expo-av": "~8.0.0",
     "expo-constants": "~8.0.0",
