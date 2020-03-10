@@ -1,5 +1,8 @@
 Project is about upload musical video or audio as an individual porfolio.
 
+![Screenshot](screenshot1.jpg)
+
+
 User can:
 1. Share audio/video with title and description
 2. Comment, delete and modify their post
