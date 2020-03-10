@@ -1,9 +1,5 @@
 Project is about upload musical video or audio as an individual porfolio.
 
-![](assets/screenshot1.jpg)
-
-
-
 User can:
 1. Share audio/video with title and description
 2. Comment, delete and modify their post
@@ -49,3 +45,6 @@ Dependencies:
     "validate.js": "^0.13.1",
     "validator": "^12.2.0",
     "validator.js": "^2.0.4"
+
+![](assets/screenshot1.jpg)
+![](assets/screenshot2.jpg)
