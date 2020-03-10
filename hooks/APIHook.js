@@ -168,6 +168,7 @@ const getUserList = async () => {
   }
 };
 
+// delete file
 const deleteFile = async (id) => {
   const token = await AsyncStorage.getItem('userToken');
   const result = await fetchDELETE('media', id, token);

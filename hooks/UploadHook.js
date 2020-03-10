@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import {useState} from 'react';
 import validate from 'validate.js';
 import {uploadConstraints} from '../constants/validationConst';
@@ -5,8 +6,10 @@ import {AsyncStorage} from 'react-native';
 import {getMediaByTag, fetchPOST,
   fetchFormData, getCurrentUser} from '../hooks/APIHook';
 
+
 const useUploadForm = () => {
   const [inputs, setInputs] = useState({});
+
 
   const handleTitleChange = (text) => {
     const error = validate({title: inputs.title},
@@ -96,7 +99,7 @@ const useUploadForm = () => {
         const tagFile = await fetchPOST('tags', tag, token);
         console.log('tag', tagFile);
         if (tagFile.message=='Tag added') {
-          alert('Update success. Please log out');
+          alert('Succeed. Please log out');
         } else {
           alert('Update failed. Contact admin');
         }

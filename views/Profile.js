@@ -47,6 +47,7 @@ const Profile = (props) => {
       } else {
         avPic = mediaURL + reversePic[0].filename;
       }
+      console.log('profile pic', avPic);
       const token = await AsyncStorage.getItem('userToken');
       const data= await getUserMedia(token);
       const favList = await getFavourites();
@@ -134,7 +135,7 @@ const Profile = (props) => {
           </CardItem>
         </Card>
         <View>
-          <ProfileList navigation ={navigation} mode={'all'}></ProfileList>
+          <ProfileList navigation = {navigation} mode={'all'}></ProfileList>
         </View>
       </Content>
       <NavigationEvents

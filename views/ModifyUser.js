@@ -19,11 +19,12 @@ import {fetchPUT, getCurrentUser} from '../hooks/APIHook';
 import {AsyncStorage} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import useUploadForm from '../hooks/UploadHook';
+import {MediaContext} from '../contexts/MediaContext';
 
 const ModifyUser = (props) => {
   const [send, setSend] = useState(false);
   const [image, setImage] = useState(null);
-
+  const {ava, setAva} = useContext(MediaContext);
   const {
     handlePasswordChange,
     handleConfirmPasswordChange,
@@ -147,10 +148,11 @@ const ModifyUser = (props) => {
               />
               <Button rounded light
                 onPress={() => {
-                  if (!inputs.email) {
-                    alert('Enter new email.');
+                  if (Object.keys(inputs).length == 0) {
+                    alert('New email is blank.');
+                  } else {
+                    save(inputs);
                   }
-                  save(inputs);
                 }}>
                 <Text>Save</Text>
               </Button>
@@ -184,12 +186,13 @@ const ModifyUser = (props) => {
               />
               <Button rounded light
                 onPress={() => {
-                  if (!inputs.password || !inputs.confirmPassword) {
+                  if (Object.keys(inputs).length < 2) {
                     alert('Enter new password or confirm password.');
+                  } else {
+                    const newInput = {'password': inputs.password};
+                    console.log('modify163', newInput);
+                    save(newInput);
                   }
-                  const newInput = {'password': inputs.password};
-                  console.log('modify163', newInput);
-                  save(newInput);
                 }}>
                 <Text>Save</Text>
               </Button>
