@@ -1,6 +1,6 @@
 Project is about upload musical video or audio as an individual porfolio.
 
-![](assets/screenshot1.jpg | width=100)
+![](assets/screenshot1.jpg)
 
 
 
