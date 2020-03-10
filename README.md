@@ -1,5 +1,9 @@
 Project is about upload musical video or audio as an individual porfolio.
 
+![Home]('assets/screenshot1.jpg')
+
+
+
 User can:
 1. Share audio/video with title and description
 2. Comment, delete and modify their post
@@ -10,8 +14,14 @@ Bottom tab: Home, Profile, Upload and Favourites
 
 Stack: Search, Modify Post, Modify User, Single
 
+How to run app:
+1. Clone github
+2. Download dependencies
+3. npm start in terminal
+4. Mobile phones need vpn to metropolia server to see video
+
 Dependencies:
-"@react-native-community/masked-view": "0.1.5",
+    "@react-native-community/masked-view": "0.1.5",
     "expo": "~36.0.0",
     "expo-av": "~8.0.0",
     "expo-constants": "~8.0.0",
