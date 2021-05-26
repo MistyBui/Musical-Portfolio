@@ -1647,13 +1647,15 @@ braces@^2.3.1:
     to-regex "^3.0.1"
 
 browserslist@^4.8.3, browserslist@^4.8.5:
-  version "4.8.7"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.8.7.tgz#ec8301ff415e6a42c949d0e66b405eb539c532d0"
-  integrity sha512-gFOnZNYBHrEyUML0xr5NJ6edFaaKbTFX9S9kQHlYfCP0Rit/boRIz4G+Avq6/4haEKJXdGGUnoolx+5MWW2BoA==
+  version "4.16.6"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.16.6.tgz#d7901277a5a88e554ed305b183ec9b0c08f66fa2"
+  integrity sha512-Wspk/PqO+4W9qp5iUTJsa1B/QrYn1keNCcEP5OvP7WBwT4KaDly0uONYmC6Xa3Z5IqnUgS0KcgLYu1l74x0ZXQ==
   dependencies:
-    caniuse-lite "^1.0.30001027"
-    electron-to-chromium "^1.3.349"
-    node-releases "^1.1.49"
+    caniuse-lite "^1.0.30001219"
+    colorette "^1.2.2"
+    electron-to-chromium "^1.3.723"
+    escalade "^3.1.1"
+    node-releases "^1.1.71"
 
 bser@2.1.1:
   version "2.1.1"
@@ -1744,10 +1746,10 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
-caniuse-lite@^1.0.30001027:
-  version "1.0.30001027"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001027.tgz#283e2ef17d94889cc216a22c6f85303d78ca852d"
-  integrity sha512-7xvKeErvXZFtUItTHgNtLgS9RJpVnwBlWX8jSo/BO8VsF6deszemZSkJJJA1KOKrXuzZH4WALpAJdq5EyfgMLg==
+caniuse-lite@^1.0.30001219:
+  version "1.0.30001230"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001230.tgz#8135c57459854b2240b57a4a6786044bdc5a9f71"
+  integrity sha512-5yBd5nWCBS+jWKTcHOzXwo5xzcj4ePE/yjtkZyUV1BTUmrBaA9MRGC+e7mxnqXSA90CmCA8L3eKLaSUkt099IQ==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -1928,10 +1930,10 @@ color@^3.1.2, color@~3.1.2:
     color-convert "^1.9.1"
     color-string "^1.5.2"
 
-colorette@^1.0.7:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.1.0.tgz#1f943e5a357fac10b4e0f5aaef3b14cdc1af6ec7"
-  integrity sha512-6S062WDQUXi6hOfkO/sBPVwE5ASXY4G2+b4atvhJfSsuUUhIaUKlkjLe9692Ipyt5/a+IPF5aVTu3V5gvXq5cg==
+colorette@^1.0.7, colorette@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
+  integrity sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
 
 command-exists@^1.2.8:
   version "1.2.8"
@@ -2216,10 +2218,10 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-electron-to-chromium@^1.3.349:
-  version "1.3.353"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.353.tgz#c6f13f27d5212643979867a400c1a5e8a4ef042a"
-  integrity sha512-CkG24biyy9qQTQs8U2vGQaiyWSFDxAXP/UGHBveXZ1TGoWOAw+eYZXryrX0UeIMKnQjcaHx33hzYuydv98kqGQ==
+electron-to-chromium@^1.3.723:
+  version "1.3.739"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.739.tgz#f07756aa92cabd5a6eec6f491525a64fe62f98b9"
+  integrity sha512-+LPJVRsN7hGZ9EIUUiWCpO7l4E3qBYHNadazlucBfsXBbccDFNKUBAgzE68FnkWGJPwD/AfKhSzL+G+Iqb8A4A==
 
 emoji-regex@^7.0.1:
   version "7.0.3"
@@ -2295,6 +2297,11 @@ es-to-primitive@^1.2.1:
     is-callable "^1.1.4"
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
+
+escalade@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
+  integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
 escape-html@~1.0.3:
   version "1.0.3"
@@ -2535,10 +2542,10 @@ expo-constants@~8.0.0:
   dependencies:
     ua-parser-js "^0.7.19"
 
-expo-document-picker@~8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/expo-document-picker/-/expo-document-picker-8.0.0.tgz#112a3e518398af4c793b7de08e26857838df6871"
-  integrity sha512-lr1ZChMh33qI8o7627D2BvbDKqMOdDu4WxfXNpMGI8iyKNVvUH78Aa+/3FVFK8L8EuRLMcgUmj0aP6nALaIznA==
+expo-document-picker@^8.0.0:
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/expo-document-picker/-/expo-document-picker-8.4.1.tgz#20fc07328ea6155c65fdefecf4b531c6681ca004"
+  integrity sha512-/Si7pSa6dheygGhQA/Ig7XD1uLAFYJaLKXTi0V51+KmHA41F1KeAnoViUAzyKaNSV/bCu6FmiQNosN6OYAV1Hg==
   dependencies:
     uuid "^3.3.2"
 
@@ -2561,12 +2568,13 @@ expo-font@~8.0.0:
   dependencies:
     fontfaceobserver "^2.1.0"
 
-expo-image-picker@~8.0.1:
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-8.0.2.tgz#14139f1d73793ae7fba6fe3cf34e1dc91baf402a"
-  integrity sha512-oa0/JoKIv5mxyadpVqiQ+BXak2s7QS3+Rurj1j/gL5GGFmb3cDJWbGHxvtrEXEccv8812JAp5BfBRqfzlW1gMQ==
+expo-image-picker@^8.0.2:
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-8.4.0.tgz#b4a7c06411f1b190cb6fb695a3cdf0fb8f29dfb2"
+  integrity sha512-XvBNxC5ZXJN9Vsvr+QFk9PYJW1PP7YoPqprFfoBeg1/eBtCAEjgqdQ2o/Ak1RQoCqwg8SEKxxHtQpGogZZCx5g==
   dependencies:
-    expo-permissions "*"
+    expo-permissions "~9.1.0"
+    uuid "7.0.2"
 
 expo-keep-awake@~8.0.0:
   version "8.0.0"
@@ -2585,10 +2593,15 @@ expo-location@~8.0.0:
   dependencies:
     invariant "^2.2.4"
 
-expo-permissions@*, expo-permissions@~8.0.0:
+expo-permissions@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-8.0.0.tgz#5a45e8451dd7ff37c9e6ce5e2447818372547813"
   integrity sha512-GHTRmwh1rd1b0FcibluPFu93NNQyl9b1anBBDVPmomoo9Prz7kDcO5p2hFqM99r896yvAUSe0fPloPKUq4g/1A==
+
+expo-permissions@~9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-9.1.0.tgz#b830a9e8100d5650a874122b432a65ab1dfdf4c1"
+  integrity sha512-nNF8voeRSzMCIJzt27dmpHHm70ZiZh528GJJzHd9qX9aIgrN2j0WsrFI31p7Q8uPUI8HDCBbF7JmvO91GmFrhQ==
 
 expo-sqlite@~8.0.0:
   version "8.0.0"
@@ -4354,12 +4367,10 @@ node-notifier@^5.2.1:
     shellwords "^0.1.1"
     which "^1.3.0"
 
-node-releases@^1.1.49:
-  version "1.1.49"
-  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.49.tgz#67ba5a3fac2319262675ef864ed56798bb33b93e"
-  integrity sha512-xH8t0LS0disN0mtRCh+eByxFPie+msJUBL/lJDBuap53QGiYPa9joh83K4pCZgWJ+2L4b9h88vCVdXQ60NO2bg==
-  dependencies:
-    semver "^6.3.0"
+node-releases@^1.1.71:
+  version "1.1.72"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.72.tgz#14802ab6b1039a79a0c7d662b610a5bbd76eacbe"
+  integrity sha512-LLUo+PpH3dU6XizX3iVoubUNheF/owjXCZZ5yACDxNnPtgFuludV1ZL3ayK1kVep42Rmm0+R9/Y60NQbZ2bifw==
 
 noop-fn@^1.0.0:
   version "1.0.0"
@@ -5036,6 +5047,11 @@ react-native-tab-view@^2.11.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.13.0.tgz#23037aa43b0f8f682ddc20415a4baaaf6f82ae8f"
   integrity sha512-AeYbp/u91+D/C9+PmVEPBmFb3ixv8IkLMC3Sc5MajJ/fg0Zl3Of+BcEknBvTnKoe7Fj2y8+Qf9zorBbh5xzh4A==
+
+react-native-thumbnail-video@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-thumbnail-video/-/react-native-thumbnail-video-0.1.2.tgz#a50e3c665ce987d641da43d2528e372cac111322"
+  integrity sha512-+dD8dIUxiZz/QaL+gOtmb3Co/VE0MK5s8el9fYXpuEZbQu882voz7ALJmEn5o7A62sDTT3mpR2UF1V0ioXTFKA==
 
 react-native-vector-icons@^4.5.0:
   version "4.6.0"
@@ -6190,6 +6206,11 @@ uuid-js@^0.7.5:
   version "0.7.5"
   resolved "https://registry.yarnpkg.com/uuid-js/-/uuid-js-0.7.5.tgz#6c886d02a53d2d40dcf25d91a170b4a7b25b94d0"
   integrity sha1-bIhtAqU9LUDc8l2RoXC0p7JblNA=
+
+uuid@7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.2.tgz#7ff5c203467e91f5e0d85cfcbaaf7d2ebbca9be6"
+  integrity sha512-vy9V/+pKG+5ZTYKf+VcphF5Oc6EFiu3W8Nv3P3zIh0EqVI80ZxOzuPfe9EHjkFNvf8+xuTHVeei4Drydlx4zjw==
 
 uuid@^3.3.2:
   version "3.4.0"
